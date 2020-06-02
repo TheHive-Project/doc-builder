@@ -6,7 +6,8 @@ GITHUB_REPO=$1
 GITHUB_ORG=$2
 GITHUB_TOKEN=$3
 
-
+MYPATH=`realpath $0`
+MYDIR=`dirname ${path}`
 
 clone() {
   echo "[+] Cloning repo ${GITHUB_REPO}"
@@ -14,17 +15,11 @@ clone() {
 }
 
 build_doc() {
-  echo "[+] Building doc for ${DOCKER_REPO}"
+  echo "[+] Building  and publishing the doc for ${GITHUB_REPO}"
+  cp build/${GITHUB_REPO}/* ${GITHUB_REPO}/
   cd ${GITHUB_REPO}
-  /build/${GITHUB_REPO}/build.sh
+  /bin/bash build.sh
 }
 
-publish_doc() {
-  echo "[+] Publishing doc..."
-  cd ${GITHUB_REPO}
-  mkdocs gh-deploy
-}
-
-clone()
-build_doc()
-publish_doc()
+clone
+build_doc

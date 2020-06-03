@@ -35,10 +35,10 @@ steps:
 Programs are set in `/build/Cortex-Analyzers` folder.
 
 `build.sh` call a second program called `generate.py` that:
- 
-    - generates all .md files, one for each neuron in the `Cortex-Analyzers/docs` folder
-    - copies some existing .md files in the `docs/` folder
-    - generates a `mkdocs.yml`
+
+- generates all .md files, one for each neuron in the `Cortex-Analyzers/docs` folder
+- copies some existing .md files in the `docs/` folder
+- generates a `mkdocs.yml`
 
 Then, run `mkdocs gh-deploy`. 
 

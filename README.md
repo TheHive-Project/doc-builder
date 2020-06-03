@@ -12,7 +12,7 @@ Once cloned, all files found in the `/build/<REPO_NAME>` folder are copied to th
 
 # Trigger 
 
-`done.yml` file: 
+`drone.yml` file: 
 
 ```yaml
 

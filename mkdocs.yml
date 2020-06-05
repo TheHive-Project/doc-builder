@@ -4,7 +4,7 @@ site_name: TheHive4py Documentation
 site_url: https://thehive-project.github.io/thehive4py
 theme:
   name: "material"
-  logo: 'images/thehive.png'
+  logo: 'images/thehive-logo.png'
   palette:
     primary: 'blue'
     accent: blue

@@ -13,7 +13,7 @@ build_doc() {
   echo "[+] Building doc for ${TYPE}"
   
   /usr/local/bin/${TYPE}/generate.py
-  cp -v CHANGELOG.md dozcs/.
+  cp -v CHANGELOG.md docs/.
   cp -v code_of_conduct.md docs/.
   cp -rv images docs/
   cp -rv README.md docs/

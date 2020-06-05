@@ -16,13 +16,9 @@ The program can also be run as a command line:
 
 ## Trigger 
 
-`drone.yml` file: 
+Use with Drone:
 
 ```yaml
-
-kind: pipeline
-name: default
-
 steps:
   - name: Prepare documentation files
     image: thehiveproject/doc-builder
@@ -30,7 +26,7 @@ steps:
       - type: <type>
     when:
       branch:
-      - event: [tag]
+      - master
 ```
 
 ## Existing types

@@ -1,9 +1,9 @@
-FROM python:3
+FROM python:3-slim
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ./build /
+ADD build/ /usr/local/bin/
  
-COPY entrypoint.sh /
+COPY entrypoint.sh /usr/local/bin
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

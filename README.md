@@ -4,13 +4,17 @@ Used by Drone to build documentation website.
 
 # Usage
 
-The `entrypoint.sh` program is in charge of cloning the right repository and  run a script name `build.sh` that is in charge of building the documentation, and publish it.
+The `entrypoint.sh` runs script named `build.sh` with the `PLUGIN_TYPE` variable. This programs is in charge of building specific documentation from some repositories like [Cortex-Neurons](https://github.com/TheHive-Project/Cortex-Analyzers/).
 
-Program to build and publish the documentation for a repo can be added in a folder named `/build/<REPO_NAME>` of this project.
+Program to build and publish a specific documentation for a repo should be added in a folder named `/build/<type>` of this project. The `type` value is set in Drone and read as `PLUGIN_TYPE`. 
 
-Once cloned, all files found in the `/build/<REPO_NAME>` folder are copied to the `/<REPO_NAME>/` folder, and the `build.sh` file is run.
+The program can also be run as a command line:
 
-# Trigger 
+```bash
+./build/<type>/build.sh <TYPE>
+```
+
+## Trigger 
 
 `drone.yml` file: 
 
@@ -20,27 +24,15 @@ kind: pipeline
 name: default
 
 steps:
-  - name: Build Cortex-Neurons documentation
+  - name: Prepare documentation files
     image: thehiveproject/doc-builder
-  when:
-    branch:
-    - event: [tag]
+    settings:
+      - type: <type>
+    when:
+      branch:
+      - event: [tag]
 ```
 
+## Existing types
 
-# Websites 
-
-## Cortex-Analyzers
-
-Programs are set in `/build/Cortex-Analyzers` folder.
-
-`build.sh` call a second program called `generate.py` that:
-
-- generates all .md files, one for each neuron in the `Cortex-Analyzers/docs` folder
-- copies some existing .md files in the `docs/` folder
-- generates a `mkdocs.yml`
-
-Then, run `mkdocs gh-deploy`. 
-
-The documentation can be seen at [](https://thehive-project.github.io/Cortex-Analyzers/).
-
+- `Cortex-Neurons` for [Cortex-Neurons](https://github.com/TheHive-Project/Cortex-Analyzers/) repository.

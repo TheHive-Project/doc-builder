@@ -152,7 +152,7 @@ def build_mkdocs(md_path, mkdocs_filename):
     site_name: Cortex Neurons documentation      
     theme:
         name: 'material'
-        logo: 'images/cortex-logo.png'
+        logo: 'docs/images/cortex-logo.png'
         palette:
           primary: 'blue'
           accent: blue
@@ -193,8 +193,8 @@ def build_mkdocs(md_path, mkdocs_filename):
           - 'Changelog': 'CHANGELOG.md'
           - 'Code of Conduct': 'code_of_conduct.md'
           - 'Developers guides':
-            - 'Analyzer definition': 'developers_guides/analyzers_definition.md'
-            - 'How to write an Analyzer': 'developers_guides/how-to-create-an-analyzer.md'
+            - 'Analyzer definition': 'docs/analyzers_definition.md'
+            - 'How to write an Analyzer': 'docs/how-to-create-an-analyzer.md'
   """
   mk = yaml.safe_load(mkdocs)
   nav1 = yaml.safe_load(mkdocs_nav_part1)

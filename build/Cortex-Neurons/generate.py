@@ -64,6 +64,7 @@ def neuron2md(nt,neuron, doc_path):
           mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
           readme.close
 
+        # Identity
         mdFile.new_header(level=2, title=config.get('name'))
         mdFile.new_line("!!! note \"\"")
         mdFile.new_line("    **Author**: _{}_".format(config.get('author')))
@@ -79,11 +80,17 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line('    **Third party service**: '+\
           mdFile.new_inline_link(link=config.get('service_homepage', 'N/A'), text=config.get('service_homepage', 'N/A')))
         
+        # Description
         mdFile.new_line()
         mdFile.new_header(level=3, title='Description')
         mdFile.new_paragraph(config.get('description', 'N/A'))
-    
+        # add README.md file  in description
+        if 'README.md' in listdir(neuron_path):
+          readme = open("{}/README.md".format(neuron_path), 'r')
+          mdFile.new_paragraph("{}".format(readme.read().replace('\n','\n    ')))
+          readme.close
       
+        # Configuration
         mdFile.new_line()
         mdFile.new_header(level=3, title='Configuration')
         
@@ -100,6 +107,12 @@ def neuron2md(nt,neuron, doc_path):
         else:
           mdFile.new_paragraph("No specific configuration required.")
     
+        #  Notes.md file 
+        if 'notes.md' in listdir(neuron_path):
+          notes = open("{}/notes.md".format(neuron_path), 'r')
+          mdFile.new_line("!!! tip \"Developer notes\"")
+          mdFile.new_paragraph("    {}".format(notes.read().replace('\n','\n    ')))
+          notes.close
     
     # Analysers report samples 
     if nt == "analyzers" and f.endswith(".json"):
@@ -123,6 +136,7 @@ def neuron2md(nt,neuron, doc_path):
             mdFile.new_paragraph(mdFile.new_inline_image(text=sc.get('caption','screenshot'), path=sc_md_path))
       else:
         mdFile.new_paragraph("No template samples to display.")
+
 
   # Save md file
   dest_dir = path.join(doc_path, nt)

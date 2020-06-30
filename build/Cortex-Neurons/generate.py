@@ -58,7 +58,7 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line()
 
         # Description and README.md file 
-        if 'README.md' in listdir(neuron_path):
+        if 'notes.md' in listdir(neuron_path):
           readme = open("{}/README.md".format(neuron_path), 'r')
           mdFile.new_line("!!! tip \"Developer notes\"")
           mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
@@ -213,6 +213,10 @@ def run():
   mkdocs_filename = "./mkdocs.yml" 
   # Build md file for each neuron and build files tree
   for nt in ["analyzers", "responders"] :
+    ## Build folders
+    if not path.exists(path.join(doc_path, nt)):
+       makedirs(path.join(doc_path, nt))
+       makedirs(path.join(doc_path, nt, "assets"))
     if path.exists(nt):
       for neuron in [d for d in listdir(nt) if path.isdir(path.join(nt,d))]:
         neuron2md(nt, neuron, doc_path)

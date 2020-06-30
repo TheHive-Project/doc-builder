@@ -67,7 +67,7 @@ def neuron2md(nt,neuron, doc_path):
           mdFile.new_line("    **Supported observables types**:")
         else:
           mdFile.new_line("    **Supported data types**:")
-        mdFile.new_list(config.get('dataTypeList'))
+        mdFile.new_paragraph("   ``mdFile.new_list(config.get('dataTypeList')``)
         mdFile.new_line("    **Registration required**: \
           _{}_".format(config.get('registration_required','N/A')))
         mdFile.new_line("    **Subscription required**: \
@@ -82,6 +82,7 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_header(level=3, title='Description')
         mdFile.new_paragraph(config.get('description', 'N/A'))
         # add README.md file  in description
+        mdFile.new_line()
         if 'README.md' in listdir(neuron_path):
           readme = open("{}/README.md".format(neuron_path), 'r')
           mdFile.new_line("!!! abstract \"README\"")

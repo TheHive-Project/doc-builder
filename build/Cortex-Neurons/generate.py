@@ -69,7 +69,8 @@ def neuron2md(nt,neuron, doc_path):
           mdFile.new_line("    **Supported observables types**:")
         else:
           mdFile.new_line("    **Supported data types**:")
-        mdFile.new_paragraph("   ``mdFile.new_list(config.get('dataTypeList'))``")
+        for item in config.get('dataTypeList'):
+          mdFile.new_line("   - {}".format(item))
         mdFile.new_line("    **Registration required**: \
           _{}_".format(config.get('registration_required','N/A')))
         mdFile.new_line("    **Subscription required**: \

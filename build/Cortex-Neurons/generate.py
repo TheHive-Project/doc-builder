@@ -63,7 +63,11 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line("    **Author**: _{}_".format(config.get('author')))
         mdFile.new_line("    **License**: _{}_".format(config.get('license')))
         mdFile.new_line("    **Version**: _{}_".format(config.get('version')))
-        mdFile.new_line("    **Supported observables types**: _{}_".format(config.get('dataTypeList')))
+        if nt is "analyzers":
+          mdFile.new_line("    **Supported observables types**:")
+        else:
+          mdFile.new_line("    **Supported data types**:")
+        mdFile.new_list(config.get('dataTypeList'))
         mdFile.new_line("    **Registration required**: \
           _{}_".format(config.get('registration_required','N/A')))
         mdFile.new_line("    **Subscription required**: \

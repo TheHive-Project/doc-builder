@@ -58,6 +58,7 @@ def neuron2md(nt,neuron, doc_path):
             logo_md_path = path.join("assets", logo_filename)
             logo_dest_path = path.join(doc_path,nt,logo_md_path)
             copy(logo_src_path, logo_dest_path)
+            logo_md_path = path.join("../", logo_md_path)  ## trick to make Html.image work
             mdFile.new_paragraph(Html.image(path=logo_md_path, size='150', align='center'))
 
         mdFile.new_line()

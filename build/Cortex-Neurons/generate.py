@@ -45,6 +45,7 @@ def neuron2md(nt,neuron, doc_path):
         config = json.load(fc)
         # Title
         mdFile.new_header(level=2, title=config.get('name'))
+        
         # Logo
         if config.get('service_logo'):
           logo_path = config.get('service_logo').get('path')
@@ -68,7 +69,7 @@ def neuron2md(nt,neuron, doc_path):
           mdFile.new_line("    **Supported observables types**:")
         else:
           mdFile.new_line("    **Supported data types**:")
-        mdFile.new_paragraph("   ``mdFile.new_list(config.get('dataTypeList')``)
+        mdFile.new_paragraph("   ``mdFile.new_list(config.get('dataTypeList'))``")
         mdFile.new_line("    **Registration required**: \
           _{}_".format(config.get('registration_required','N/A')))
         mdFile.new_line("    **Subscription required**: \

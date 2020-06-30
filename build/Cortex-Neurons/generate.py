@@ -166,7 +166,7 @@ def build_mkdocs(md_path, mkdocs_filename):
     site_name: Cortex Neurons documentation      
     theme:
         name: 'material'
-        logo: 'docs/images/cortex-logo.png'
+        logo: 'images/cortex-logo.png'
         palette:
           primary: 'blue'
           accent: blue

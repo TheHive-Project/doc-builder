@@ -57,13 +57,6 @@ def neuron2md(nt,neuron, doc_path):
 
         mdFile.new_line()
 
-        # Description and README.md file 
-        if 'notes.md' in listdir(neuron_path):
-          readme = open("{}/README.md".format(neuron_path), 'r')
-          mdFile.new_line("!!! tip \"Developer notes\"")
-          mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
-          readme.close
-
         # Identity
         mdFile.new_header(level=2, title=config.get('name'))
         mdFile.new_line("!!! note \"\"")
@@ -87,7 +80,8 @@ def neuron2md(nt,neuron, doc_path):
         # add README.md file  in description
         if 'README.md' in listdir(neuron_path):
           readme = open("{}/README.md".format(neuron_path), 'r')
-          mdFile.new_paragraph("{}".format(readme.read().replace('\n','\n    ')))
+          mdFile.new_line("!!! abstract \"README\"")
+          mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
           readme.close
       
         # Configuration

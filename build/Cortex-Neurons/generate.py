@@ -43,6 +43,8 @@ def neuron2md(nt,neuron, doc_path):
     if nt in ["analyzers", "responders"] and f.endswith(".json"):
       with open(path.join(neuron_path, f),'r') as fc:
         config = json.load(fc)
+        # Title
+        mdFile.new_header(level=2, title=config.get('name'))
         # Logo
         if config.get('service_logo'):
           logo_path = config.get('service_logo').get('path')
@@ -58,7 +60,6 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line()
 
         # Identity
-        mdFile.new_header(level=2, title=config.get('name'))
         mdFile.new_line("!!! note \"\"")
         mdFile.new_line("    **Author**: _{}_".format(config.get('author')))
         mdFile.new_line("    **License**: _{}_".format(config.get('license')))

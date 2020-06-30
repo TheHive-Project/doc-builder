@@ -49,11 +49,13 @@ def neuron2md(nt,neuron, doc_path):
         # Logo
         if config.get('service_logo'):
           logo_path = config.get('service_logo').get('path')
-          logo_src_path = path.join(neuron_path,config.get('service_logo').get('path'))
+          logo_src_path = path.join(neuron_path,logo_path)
           if path.exists(logo_src_path):
-            ext = logo_path.split('.')[-1]
-            logo_md_name = "{}_logo.{}".format(f.split('.')[0],ext)
-            logo_md_path = path.join("assets", logo_md_name)
+            logo_filename = path.basename(logo_path)
+            ext = logo_filename.split('.')[-1]
+            logo_filename = logo_filename.split('.')[0]
+            logo_filename = "{}_logo.{}".format(f.split('.')[0],ext)
+            logo_md_path = path.join("assets", logo_filename)
             logo_dest_path = path.join(doc_path,nt,logo_md_path)
             copy(logo_src_path, logo_dest_path)
             mdFile.new_paragraph(Html.image(path=logo_md_path, size='150', align='center'))

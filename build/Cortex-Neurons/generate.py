@@ -194,6 +194,8 @@ def build_mkdocs(md_path, mkdocs_filename):
         - pymdownx.tabbed
     plugins:
         - search
+        - git-revision-date-localized:
+            type: datetime
         - awesome-pages:
             filename: .md
     extra_css:

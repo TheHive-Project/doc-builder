@@ -131,7 +131,8 @@ def neuron2md(nt,neuron, doc_path):
           if path.exists(sc_src_path):
             sc_filename = path.basename(sc.get('path'))
             ext = sc_filename.split('.')[-1]
-            sc_filename="{}_{}.{}".format(base_neuronname,idx,ext)
+            sc_filename = path.basename(f).split('.')[0]
+            sc_filename="{}_{}.{}".format(sc_filename,idx,ext)
             sc_md_path = path.join("assets",sc_filename)
             sc_dest_path =path.join(doc_path,nt,sc_md_path)
             copy(sc_src_path, sc_dest_path)

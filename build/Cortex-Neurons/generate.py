@@ -56,7 +56,7 @@ def neuron2md(nt,neuron, doc_path):
             logo_md_path = path.join("assets", logo_md_name)
             logo_dest_path = path.join(doc_path,nt,logo_md_path)
             copy(logo_src_path, logo_dest_path)
-            mdFile.paragraph(Html.image(path=logo_md_path, size='150'))
+            mdFile.new_paragraph(Html.image(path=logo_md_path, size='150', align='center'))
 
         mdFile.new_line()
 
@@ -70,7 +70,7 @@ def neuron2md(nt,neuron, doc_path):
         else:
           mdFile.new_line("    **Supported data types**:")
         for item in config.get('dataTypeList'):
-          mdFile.new_line("   - {}".format(item))
+          mdFile.new_line("      - {}".format(item))
         mdFile.new_line("    **Registration required**: \
           _{}_".format(config.get('registration_required','N/A')))
         mdFile.new_line("    **Subscription required**: \

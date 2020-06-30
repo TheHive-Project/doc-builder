@@ -215,8 +215,8 @@ def build_mkdocs(md_path, mkdocs_filename):
           - 'Changelog': 'CHANGELOG.md'
           - 'Code of Conduct': 'code_of_conduct.md'
           - 'Developers guides':
-            - 'Analyzer definition': 'docs/analyzers_definition.md'
-            - 'How to write an Analyzer': 'docs/how-to-create-an-analyzer.md'
+            - 'Analyzer definition': 'analyzers_definition.md'
+            - 'How to write an Analyzer': 'how-to-create-an-analyzer.md'
   """
   mk = yaml.safe_load(mkdocs)
   nav1 = yaml.safe_load(mkdocs_nav_part1)

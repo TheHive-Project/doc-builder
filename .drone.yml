@@ -1,12 +1,47 @@
 ---
 kind: pipeline
 name: default
+type: docker
 
 steps:
-  - name: Publish documentation 
-    image: thehiveproject/mkdocs
+  - name: build & push image on Harbor
+    image: plugins/docker
     settings:
-      token: {from_secret: github_token}
+      username: {from_secret: harbor_username}
+      password: {from_secret: harbor_password}
+      repo: {from_secret: harbor_repo}
+      registry: {from_secret: harbor_registry}
     when:
       branch:
       - master
+
+  - name: build & push image on DockerHub
+    image: plugins/docker
+    settings:
+      username: {from_secret: docker_username}
+      password: {from_secret: docker_password}
+      repo: {from_secret: docker_repo}
+    when:
+      branch:
+      - master
+
+  - name: send message
+    image: thehiveproject/drone_keybase
+    settings:
+      username: {from_secret: keybase_username}
+      paperkey: {from_secret: keybase_paperkey}
+      channel: {from_secret: keybase_channel}
+    commands:
+      - |
+        keybase oneshot -u "$PLUGIN_USERNAME" --paperkey "$PLUGIN_PAPERKEY"
+        URL="$DRONE_SYSTEM_PROTO://$DRONE_SYSTEM_HOST/$DRONE_REPO/$DRONE_BUILD_NUMBER"
+        if [ $DRONE_BUILD_STATUS = "success" ]
+        then
+          keybase chat send "$PLUGIN_CHANNEL" ":white_check_mark: $DRONE_REPO: build succeeded $URL"
+        else
+          keybase chat send "$PLUGIN_CHANNEL" ":x: $DRONE_REPO: build failed $URL"
+        fi
+    when:
+      status:
+      - success
+      - failure

@@ -36,7 +36,14 @@ def neuron2md(nt,neuron, doc_path):
   mdFile = MdUtils(file_name="{}.md".format(neuron),title="")
   mdFile.new_header(level=1, title=neuron)
 
-  
+  # add README.md file  in description
+  mdFile.new_line()
+  if 'README.md' in listdir(neuron_path):
+    readme = open("{}/README.md".format(neuron_path), 'r')
+    mdFile.new_line("!!! abstract \"README\"")
+    mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
+    readme.close
+
   #print(neuron)
     # Analyzers or Responders flavors
   for f in listdir(path.join(nt,neuron)):
@@ -68,7 +75,7 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line("    **Author**: _{}_".format(config.get('author')))
         mdFile.new_line("    **License**: _{}_".format(config.get('license')))
         mdFile.new_line("    **Version**: _{}_".format(config.get('version')))
-        if nt is "analyzers":
+        if nt == "analyzers":
           mdFile.new_line("    **Supported observables types**:")
         else:
           mdFile.new_line("    **Supported data types**:")
@@ -87,13 +94,7 @@ def neuron2md(nt,neuron, doc_path):
         mdFile.new_line()
         mdFile.new_header(level=3, title='Description')
         mdFile.new_paragraph(config.get('description', 'N/A'))
-        # add README.md file  in description
-        mdFile.new_line()
-        if 'README.md' in listdir(neuron_path):
-          readme = open("{}/README.md".format(neuron_path), 'r')
-          mdFile.new_line("!!! abstract \"README\"")
-          mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
-          readme.close
+        
       
         # Configuration
         mdFile.new_line()

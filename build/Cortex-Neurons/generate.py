@@ -57,7 +57,7 @@ def neuron2md(nt,neuron, doc_path):
         if config.get('service_logo'):
           logo_path = config.get('service_logo').get('path')
           logo_src_path = path.join(neuron_path,logo_path)
-          if path.exists(logo_src_path):
+          if path.exists(logo_src_path) and logo_path != "":
             logo_filename = path.basename(logo_path)
             ext = logo_filename.split('.')[-1]
             logo_filename = logo_filename.split('.')[0]

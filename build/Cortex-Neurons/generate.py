@@ -227,7 +227,7 @@ def build_mkdocs(md_path, mkdocs_filename):
   nav2 = yaml.safe_load(mkdocs_nav_part2)
   nav1.get('nav').append({'Analyzers':analyzers})
   nav1.get('nav').append({'Responders':responders})
- nav1.get('nav').append({'Developer guides':dev_guides})
+  nav1.get('nav').append({'Developer guides':dev_guides})
 
   nav1['nav'] = nav1.get('nav')+nav2
   mk.update(nav1)

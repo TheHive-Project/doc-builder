@@ -218,16 +218,13 @@ def build_mkdocs(md_path, mkdocs_filename):
   mkdocs_nav_part2 = """
           - 'Changelog': 'CHANGELOG.md'
           - 'Code of Conduct': 'code_of_conduct.md'
-          - 'Developers guides':
-            - 'Analyzer definition': 'analyzers_definition.md'
-            - 'How to write an Analyzer': 'how-to-create-an-analyzer.md'
   """
   mk = yaml.safe_load(mkdocs)
   nav1 = yaml.safe_load(mkdocs_nav_part1)
   nav2 = yaml.safe_load(mkdocs_nav_part2)
   nav1.get('nav').append({'Analyzers':analyzers})
   nav1.get('nav').append({'Responders':responders})
-  nav1.get('nav').append({'Developer guides':dev_guides})
+  nav1.get('nav').append({'Developers guides':dev_guides})
 
   nav1['nav'] = nav1.get('nav')+nav2
   mk.update(nav1)

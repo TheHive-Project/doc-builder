@@ -157,17 +157,20 @@ def neuron2md(nt,neuron, doc_path):
 
 def build_mkdocs(md_path, mkdocs_filename):
   # md_path = 'docs/'
-  nt = ['analyzers', 'responders']
+  nt = ['analyzers', 'responders', 'dev_guides']
   analyzers= []
   responders = []
+  dev_guides = []
 
   for a in nt:
     for n in sorted(listdir(path.join(md_path, a))):
       if n not in ['assets']:
         if a == "analyzers":
           analyzers.append({n.split('.')[0]:path.join(a,n)})
-        else:
+        elif a == "responders":
           responders.append({n.split('.')[0]:path.join(a,n)})
+        elif a == "dev_guides":
+          dev_guides.append({n.split('.')[0]:path.join(a,n)})
 
   mkdocs = """
     site_name: Cortex Neurons documentation      
@@ -224,6 +227,8 @@ def build_mkdocs(md_path, mkdocs_filename):
   nav2 = yaml.safe_load(mkdocs_nav_part2)
   nav1.get('nav').append({'Analyzers':analyzers})
   nav1.get('nav').append({'Responders':responders})
+ nav1.get('nav').append({'Developer guides':dev_guides})
+
   nav1['nav'] = nav1.get('nav')+nav2
   mk.update(nav1)
   

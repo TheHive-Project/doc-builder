@@ -103,7 +103,7 @@ def neuron2md(nt,neuron, doc_path):
         if config.get('configurationItems') and len(config.get('configurationItems')) > 0:
           for c in config.get('configurationItems'):
             configuration_items = ["**{}**".format(c.get('name')), c.get('description', 'No description')]
-            configuration_items.extend(["**Default value if not configured**",  "_{}_".format(c.get('default', 'N/A'))])
+            configuration_items.extend(["**Default value if not configured**",  "_{}_".format(c.get('defaultValue', 'N/A'))])
             configuration_items.extend(["**Type of the configuration item**",  "_{}_".format(c.get('type'))])
             configuration_items.extend(["**The configuration item can contain multiple values**",  "_{}_".format(c.get('multi'))])
             configuration_items.extend(["**Is required**",  "_{}_".format(c.get('required'))])

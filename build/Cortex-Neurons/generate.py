@@ -37,11 +37,11 @@ def neuron2md(nt,neuron, doc_path):
   mdFile.new_header(level=1, title=neuron)
 
   # add README.md file  in description
-  mdFile.new_line()
+  mdFile.new_line(wrap_width=0)
   if 'README.md' in listdir(neuron_path):
     readme = open("{}/README.md".format(neuron_path), 'r')
-    mdFile.new_line("!!! abstract \"README\"")
-    mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')))
+    mdFile.new_line("!!! abstract \"README\"", wrap_width=0)
+    mdFile.new_paragraph("    {}".format(readme.read().replace('\n','\n    ')), wrap_width=0)
     readme.close
 
   #print(neuron)
@@ -66,38 +66,38 @@ def neuron2md(nt,neuron, doc_path):
             logo_dest_path = path.join(doc_path,nt,logo_md_path)
             copy(logo_src_path, logo_dest_path)
             logo_md_path = path.join("../", logo_md_path)  ## trick to make Html.image work
-            mdFile.new_paragraph(Html.image(path=logo_md_path, size='150', align='center'))
+            mdFile.new_paragraph(Html.image(path=logo_md_path, size='150', align='center'), wrap_width=0)
 
-        mdFile.new_line()
+        mdFile.new_line(wrap_width=0)
 
         # Identity
-        mdFile.new_line("!!! note \"\"")
-        mdFile.new_line("    **Author**: _{}_".format(config.get('author')))
-        mdFile.new_line("    **License**: _{}_".format(config.get('license')))
-        mdFile.new_line("    **Version**: _{}_".format(config.get('version')))
+        mdFile.new_line("!!! note \"\"", wrap_width=0)
+        mdFile.new_line("    **Author**: _{}_".format(config.get('author')), wrap_width=0)
+        mdFile.new_line("    **License**: _{}_".format(config.get('license')), wrap_width=0)
+        mdFile.new_line("    **Version**: _{}_".format(config.get('version')), wrap_width=0)
         if nt == "analyzers":
-          mdFile.new_line("    **Supported observables types**:")
+          mdFile.new_line("    **Supported observables types**:", wrap_width=0)
         else:
-          mdFile.new_line("    **Supported data types**:")
+          mdFile.new_line("    **Supported data types**:", wrap_width=0)
         for item in config.get('dataTypeList'):
-          mdFile.new_line("      - {}".format(item))
+          mdFile.new_line("      - {}".format(item), wrap_width=0)
         mdFile.new_line("    **Registration required**: \
-          _{}_".format(config.get('registration_required','N/A')))
+          _{}_".format(config.get('registration_required','N/A')), wrap_width=0)
         mdFile.new_line("    **Subscription required**: \
-          _{}_".format(config.get('subscription_required','N/A')))
+          _{}_".format(config.get('subscription_required','N/A')), wrap_width=0)
         mdFile.new_line("    **Free subscription**: \
-          _{}_".format(config.get('free_subscription','N/A')))
+          _{}_".format(config.get('free_subscription', 'N/A')), wrap_width=0)
         mdFile.new_line('    **Third party service**: '+\
-          mdFile.new_inline_link(link=config.get('service_homepage', 'N/A'), text=config.get('service_homepage', 'N/A')))
+          mdFile.new_inline_link(link=config.get('service_homepage', 'N/A'), text=config.get('service_homepage', 'N/A')), wrap_width=0)
         
         # Description
-        mdFile.new_line()
+        mdFile.new_line(wrap_width=0)
         mdFile.new_header(level=3, title='Description')
-        mdFile.new_paragraph(config.get('description', 'N/A'))
+        mdFile.new_paragraph(config.get('description', 'N/A'), wrap_width=0)
         
       
         # Configuration
-        mdFile.new_line()
+        mdFile.new_line(wrap_width=0)
         mdFile.new_header(level=3, title='Configuration')
         
         if config.get('configurationItems') and len(config.get('configurationItems')) > 0:
@@ -107,23 +107,23 @@ def neuron2md(nt,neuron, doc_path):
             configuration_items.extend(["**Type of the configuration item**",  "_{}_".format(c.get('type'))])
             configuration_items.extend(["**The configuration item can contain multiple values**",  "_{}_".format(c.get('multi'))])
             configuration_items.extend(["**Is required**",  "_{}_".format(c.get('required'))])
-            mdFile.new_line()
+            mdFile.new_line(wrap_width=0)
             mdFile.new_table(columns=2, rows=5, text=configuration_items, text_align='left')
 
         else:
-          mdFile.new_paragraph("No specific configuration required.")
+          mdFile.new_paragraph("No specific configuration required.", wrap_width=0)
     
         #  Notes.md file 
         if 'notes.md' in listdir(neuron_path):
           notes = open("{}/notes.md".format(neuron_path), 'r')
-          mdFile.new_line("!!! tip \"Developer notes\"")
-          mdFile.new_paragraph("    {}".format(notes.read().replace('\n','\n    ')))
+          mdFile.new_line("!!! tip \"Developer notes\"", wrap_width=0)
+          mdFile.new_paragraph("    {}".format(notes.read().replace('\n','\n    ')), wrap_width=0)
           notes.close
     
     # Analysers report samples 
     if nt == "analyzers" and f.endswith(".json"):
       # Templates for TheHive
-      mdFile.new_line()
+      mdFile.new_line(wrap_width=0)
       mdFile.new_header(level=3, title='Templates samples for TheHive')
 
       ## Copy images files to destination folder
@@ -140,9 +140,9 @@ def neuron2md(nt,neuron, doc_path):
             sc_md_path = path.join("assets",sc_filename)
             sc_dest_path =path.join(doc_path,nt,sc_md_path)
             copy(sc_src_path, sc_dest_path)
-            mdFile.new_paragraph(mdFile.new_inline_image(text=sc.get('caption','screenshot'), path=sc_md_path))
+            mdFile.new_paragraph(mdFile.new_inline_image(text=sc.get('caption','screenshot'), path=sc_md_path), wrap_width=0)
       else:
-        mdFile.new_paragraph("No template samples to display.")
+        mdFile.new_paragraph("No template samples to display.", wrap_width=0)
 
 
   # Save md file

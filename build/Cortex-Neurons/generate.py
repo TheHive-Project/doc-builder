@@ -183,7 +183,7 @@ def build_mkdocs(md_path, mkdocs_filename):
 
     extra:
       social:
-        - icon: fontawesome/solid/home
+        - icon: fontawesome/solid/house
           link: "https://www.thehive-project.org"
         - icon: fontawesome/brands/wordpress
           link: "https://blog.thehive-project.org"

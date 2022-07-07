@@ -183,16 +183,16 @@ def build_mkdocs(md_path, mkdocs_filename):
 
     extra:
       social:
-        - icon: fontawesome/solid/house
-          link: "https://www.thehive-project.org"
-        - icon: fontawesome/brands/wordpress
-          link: "https://blog.thehive-project.org"
+        - icon: fontawesome/solid/house-chimney
+          link: "https://www.strangebee.com"
+        - icon: fontawesome/solid/newspaper
+          link: "https://blog.strangebee.com"
         - icon: fontawesome/brands/twitter
           link: "https://twitter.com/TheHive_Project"
         - icon: fontawesome/brands/github
           link: "https://github.com/TheHive-Project"
-        - icon: fontawesome/brands/gitter
-          link: "https://gitter.im/TheHive-Project/TheHive"
+        - icon: fontawesome/brands/discord
+          link: "https://chat.thehive-project.org"
     repo_name: "Cortex-Neurons"
     repo_url: "https://github.com/TheHive-Project/Cortex-Analyzers"
     markdown_extensions:

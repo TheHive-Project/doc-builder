@@ -16,7 +16,7 @@ This program also build the mkdocs file that will be used to generate and publis
 """
 
 from os import listdir, chdir, path, makedirs
-from shutil import copy
+from shutil import copy, copytree, copy2
 from mdutils.mdutils import MdUtils
 from mdutils import Html
 import yaml
@@ -157,10 +157,11 @@ def neuron2md(nt,neuron, doc_path):
 
 def build_mkdocs(md_path, mkdocs_filename):
   # md_path = 'docs/'
-  nt = ['analyzers', 'responders', 'dev_guides']
+  nt = ['analyzers', 'responders', 'dev_guides', 'admin_guides']
   analyzers= []
   responders = []
   dev_guides = []
+  admin_guides = []
 
   for a in nt:
     for n in sorted(listdir(path.join(md_path, a))):
@@ -171,6 +172,8 @@ def build_mkdocs(md_path, mkdocs_filename):
           responders.append({n.split('.')[0]:path.join(a,n)})
         elif a == "dev_guides":
           dev_guides.append({n.split('.')[0]:path.join(a,n)})
+        elif a == "admin_guides":
+          admin_guides.append({n.split('.')[0]: path.join(a, n)})
 
   mkdocs = """
     site_name: Cortex Neurons documentation      
@@ -216,6 +219,7 @@ def build_mkdocs(md_path, mkdocs_filename):
           - Home: 'README.md'
   """
   mkdocs_nav_part2 = """
+          - 'Security': 'SECURITY.md'
           - 'Changelog': 'CHANGELOG.md'
           - 'Code of Conduct': 'code_of_conduct.md'
   """
@@ -225,6 +229,7 @@ def build_mkdocs(md_path, mkdocs_filename):
   nav1.get('nav').append({'Analyzers':analyzers})
   nav1.get('nav').append({'Responders':responders})
   nav1.get('nav').append({'Developers guides':dev_guides})
+  nav1.get('nav').append({'Admin guides': admin_guides})
 
   nav1['nav'] = nav1.get('nav')+nav2
   mk.update(nav1)
@@ -245,7 +250,10 @@ def run():
     if path.exists(nt):
       for neuron in [d for d in listdir(nt) if path.isdir(path.join(nt,d))]:
         neuron2md(nt, neuron, doc_path)
-  
+        if path.exists(path.join(nt, neuron, "assets")):
+          copytree("{}/{}/assets".format(nt, neuron), "{}/{}/assets".format(doc_path, nt), symlinks=False,
+                   ignore=None, copy_function=copy2, ignore_dangling_symlinks=False, dirs_exist_ok=True)
+
   # Build mkdocs file
   build_mkdocs(doc_path, mkdocs_filename)
 

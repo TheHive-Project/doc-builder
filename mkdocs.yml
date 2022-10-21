@@ -20,7 +20,7 @@ extra_css:
 
 extra:
   social:
-    - icon: fontawesome/solid/home
+    - icon: fontawesome/solid/house
       link: "https://www.strangebee.com"
     - icon: fontawesome/brands/wordpress
       link: "https://blog.strangebee.com"

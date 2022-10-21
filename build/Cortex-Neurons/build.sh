@@ -17,6 +17,7 @@ build_doc() {
   cp -v code_of_conduct.md docs/.
   cp -rv images docs/
   cp -rv README.md docs/
+  cp -rv AUTHORS docs/AUTHORS.md
 }
 
 [[ -z "$TYPE" ]] && die "No type setting given (./build.sh <TYPE>) "
@@ -25,9 +26,3 @@ build_doc
 # while [[ $# -gt 0 ]]; do
 #   build_doc
 # done
-
-
-
-
-
-

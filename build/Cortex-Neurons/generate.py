@@ -221,6 +221,7 @@ def build_mkdocs(md_path, mkdocs_filename):
   mkdocs_nav_part2 = """
           - 'Security': 'SECURITY.md'
           - 'Changelog': 'CHANGELOG.md'
+          - 'Authors & contributors': 'AUTHORS.md'
           - 'Code of Conduct': 'code_of_conduct.md'
   """
   mk = yaml.safe_load(mkdocs)
